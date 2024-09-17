@@ -1,0 +1,93 @@
+a{
+    text-decoration: none;
+    display: inline-block;
+}
+.search-content,
+.result {
+    width: 100% !important;
+    background-color: #fff !important;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+.result h3,
+.result p,
+.result span{
+    color: #000;
+}
+
+.search-content h1 {
+    font-size: 1.4rem;
+}
+
+.result .user{
+    padding: 10px 30px;
+    flex-direction: column;
+}
+.result .user h3{
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.result .user h3 span{
+    font-size: 1em;
+}
+.result .user .username{
+    font-size: 1em;
+}
+.result .user .img{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border-radius: 100%;
+    border: 1px solid black;
+}
+.result .user .img img{
+    width: 50px;
+}
+.result .user .info{
+    margin: 0;
+}
+.result .user .info .data-joined{
+    font-size: 1em;
+}
+@media (max-width: 350px) {
+    .result .user .info .data-joined{
+        font-size: 0.9em;
+    }
+}
+
+/* comment */
+.result .comment{
+    padding: 10px 30px;
+    flex-direction: column;
+    width: 100%;
+}
+.result .comment h3{
+    font-size: 1.3em;
+}
+.result .comment .info p{
+    font-size: 1.1em;
+}
+
+/* project */
+.result .project{
+    padding: 10px 30px;
+    flex-direction: column;
+    width: 100%;
+}
+.result .project h3{
+    font-size: 1.3em;
+    margin-top: 5px;
+}
+.result .project .data svg{
+    font-size: 1.2em;
+}
+
+/* paginatior */

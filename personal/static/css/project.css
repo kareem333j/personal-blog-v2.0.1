@@ -1,0 +1,242 @@
+.project{
+    min-height: 100vh;
+    background-color: var(--section-color);
+}
+.project .title{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.project .title h3{
+    font-size: 1.7em;
+}
+.project .box{
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-bottom: 20px;
+}
+.project .info .data{
+    padding-top: 15px;
+}
+.project .info .data h3{
+    font-size: 1.2em;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.project .info .data p{
+    font-size: 1.2em;
+    display: flex;
+    gap: 15px;
+}
+.project .info .data p span{
+    font-size: 1em;
+}
+.project .info .image{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* code */
+.lang{
+    border-style: solid;
+    border-width: 0;
+    border-left-width: 4px;
+    margin-bottom: 30px;
+    padding: 0;
+    padding-top: 50px;
+    position: relative;
+    overflow-y: scroll;
+    max-height: 500px;
+    background-color: #333;
+    display: block;
+    unicode-bidi: isolate;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background: transparent; 
+}
+.lang::-webkit-scrollbar-track {
+    width: 5px;
+    background: #444;
+}
+::-webkit-scrollbar-thumb {
+    height: 0px;
+    background: #888;
+}
+.lang::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.lang::after{
+    content: attr(data-lang);
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 2px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.lang button{
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    gap: 5px;
+}
+.lang button svg{
+    color: #000 !important;
+}
+.lang:hover button{
+    display: flex;
+}
+
+/* code langs */
+.lang-html{
+    border-left-color: rgb(250, 57, 13);
+}
+.lang-html::after{
+    background-color: rgb(250, 57, 13);
+}
+
+.lang-css{
+    border-left-color: blue;
+}
+.lang-css::after{
+    background-color: blue;
+}
+
+.lang-js{
+    border-left-color: yellow;
+}
+.lang-js::after{
+    background-color: yellow;
+}
+
+.lang-py{
+    border-left-color: rgba(107, 46, 229, 0.917);
+}
+.lang-py::after{
+    background-color: rgba(107, 46, 229, 0.917);
+}
+.more-info{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+.more-info .more-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none !important;
+    font-size: 1.1em;
+    padding: 10px;
+    border: 1px solid var(--dark-color);
+    border-radius: 5px;
+    color: #fff;
+    background-color: var(--dark-color);
+    gap: 10px;
+}
+.more-info .more-btn svg{
+    color: #fff;
+    font-size: 1em;
+}
+.more-info .more-btn:hover{
+    border-color:var(--dark-color);
+    background-color: transparent !important;
+    color: var(--dark-color) !important;
+}
+.more-info .more-btn:hover svg{
+    color: var(--dark-color);
+}
+
+.project-images{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.project-images .img-div{
+    position: relative;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.4s ease-out;
+    cursor: pointer;
+}
+.project-images .img-div img{
+    transition: all 0.4s ease-out;
+    width: 100%;
+}
+.project-images .img-div::after{
+    content: "click to view image";
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: 0.4 ease-out;
+    background-color: var(--green-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    opacity: 0.4;
+    font-weight: bold;
+}
+.project-images .img-div:hover img{
+    border: 3px solid var(--green-color);
+    transform: scale(1.1);
+}
+.project-images .img-div:hover::after{
+    left: 0;
+}
+.view-full-img{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .4);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+}
+.close-btn{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 999;
+}
+.close-btn svg{
+    font-size: 2.3em;
+    border-radius: 100%;
+    color: var(--green-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}

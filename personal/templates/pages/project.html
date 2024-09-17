@@ -1,0 +1,214 @@
+{% extends 'header/header.html' %}
+{% block dashPhone %}
+<li class="nav-item">
+    <a class="nav-link p-lg-3 dashboard dashPhone" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+</li>
+{% endblock dashPhone %}
+{% block content %}
+{% load static %}
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?&amp;skin=desert"></script>
+    <link rel="stylesheet" href="{% static 'css/project.css' %}">
+
+    
+
+    <section class="project">
+        <div class="container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                <symbol id="check-circle-fill" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </symbol>
+                <symbol id="info-fill" viewBox="0 0 16 16">
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </symbol>
+                <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </symbol>
+              </svg>
+              <div class="alert alert-warning d-flex align-items-center mt-2" role="alert">
+                <svg width="20" height="20" class="bi flex-shrink-0 me-3" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  <b>Warning, </b>This page is under update you may encounter some errors 
+                </div>
+              </div>
+        </div>
+        <div class="container d-flex justify-content-center align-items-center flex-column">
+            <div class="title">
+                <h3>Info:</h3>
+            </div>
+            <div class="info box row">
+                <div class="image col-lg-5">
+                    <img class="img-fluid" src="{{project.img.url}}" alt="project-image">
+                </div>
+                <div class="data col-lg-7">
+                    <h3 class="fw-bold">Project Name: <span class="fw-normal">{{project.name}}</span></h3>
+                    <p class="fw-bold">Description: <span class="fw-normal">{{project.description}}</span></p>
+                    <p class="fw-bold">Created Date: <span class="fw-normal">{{project.created_dt}}</span></p>
+                    <p class="fw-bold">Status: <span class="fw-normal">{{project.status}}</span></p>
+                    <p class="fw-bold">Used: <span class="fw-normal">
+                        {% if project.Language.count == 0 %}
+                            undefined
+                        {% else %}
+                            {% for lang in project.Language.all %}
+                                {{lang.name}} 
+                                {% if forloop.counter < project.Language.count %}
+                                    ,
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </span></p>
+                </div>
+            </div>
+            {% if codes.count > 0 %}
+                <div class="title">
+                    <h3>Code: </h3>
+                </div>
+                <div class="box">
+                    {% for i in codes %}
+                        {% if i.name == "HTML" %}
+                            <div class="lang lang-html" data-lang="{{i.file_name}}">
+                                <button class="copy">Copy</button>
+                                <pre class="prettyprint">
+                                    <code class="language-html">
+                                        {{i.code_area}}
+                                    </code>
+                                </pre>
+                            </div>
+                        {% endif %}
+                        {% if i.name == "CSS" %}
+                        <div class="lang lang-css" data-lang="{{i.file_name}}">
+                            <button class="copy">Copy</button>
+                            <pre class="prettyprint">
+                                <code class="language-css">
+                                    {{i.code_area}}
+                                </code>
+                            </pre>
+                        </div>
+                        {% endif %}
+                        {% if i.name == "JS" %}
+                        <div class="lang lang-js" data-lang="{{i.file_name}}">
+                            <button class="copy">Copy</button>
+                            <pre class="prettyprint">
+                                <code class="language-javascripts">
+                                    {{i.code_area}}
+                                </code>
+                            </pre>
+                        </div>
+                        {% endif %}
+                        {% if i.name == "PY" %}
+                        <div class="lang lang-py" data-lang="{{i.file_name}}">
+                            <button class="copy">Copy</button>
+                            <pre class="prettyprint">
+                                <code class="language-python">
+                                    {{i.code_area}}
+                                </code>
+                            </pre>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    
+                </div>
+            {% endif %}
+
+            <!-- some images -->
+            {% if project.ProjectPhoto.count > 0 %}
+                <div class="title">
+                    <h3>Images: </h3>
+                </div>
+                <div class="box">
+                    <!-- Gallery -->
+                    <div class="row project-images">
+                        {% for img in project.ProjectPhoto.all %}
+                            <div href="{{img.img.url}}" data-img="{{img.img.url}}" target="_blank" class="col-lg-4 col-md-12 col-sm-6 mb-4 mb-lg-0 img-div">
+                                <img
+                                    src="{{img.img.url}}"
+                                    class="w-100 shadow-1-strong rounded mb-4"
+                                />
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Gallery -->
+                </div>
+                <div class="view-full-img">
+                    <div class="close-btn d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="width: 100%;height:100vh">
+                        <img class="img-fluid" src="" alt="project image">
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="more-info">
+                {% if not project.github == 'http://none.com' %}
+                    <a class="more-btn" target="_blank" href="{{project.github}}">
+                        <i class="fa-brands fa-github m-0 p-0"></i>
+                        Github Repo
+                    </a>
+                {% endif %}
+                {% if not project.link == None %}
+                    <a class="more-btn" target="_blank" href="{{project.link}}">
+                        Visit
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <textarea type="text" cols="50" rows="20" class="text-input d-none" id="myInput"></textarea>
+    </section>
+
+
+    <script>
+        let links = document.querySelectorAll(".navbar .navbar-nav li a");
+        links.forEach(
+            (ele) => {
+                // delete active
+                links.forEach(
+                    (ele)=>{
+                        ele.classList.remove("active");
+                    }
+                );
+            }
+        );
+
+        // copy code
+        let copyBtns = document.querySelectorAll('.copy');
+        [...copyBtns].map((e)=>{
+            e.addEventListener("click",()=>{
+                e.innerHTML = 'Copyed <i class="fa-solid fa-check"></i>';
+                let text = e.nextElementSibling.textContent;
+                copyCode(text);
+                setTimeout(()=>{
+                    e.innerHTML = 'Copy';
+                }, 2000);
+            });
+        });
+
+        function copyCode(code) {
+            var textArea = document.getElementById("myInput");
+            textArea.textContent = code;
+          
+            textArea.select();
+            textArea.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textArea.textContent);
+        }
+
+        // view full image
+        let viewDiv = document.querySelector('.view-full-img');
+        let viewDivImg = document.querySelector('.view-full-img img');
+        let images = document.querySelectorAll('.project-images div');
+        viewDiv.addEventListener('click',(e)=>{
+            if(e.target != viewDivImg){
+                viewDiv.style = 'display:none';
+            }
+        });
+        [...images].map((e)=>{
+            e.addEventListener('click',()=>{
+                viewDivImg.src = e.dataset.img;
+                viewDiv.style = 'display:flex';
+            });
+        });
+        
+    </script>
+{% endblock content %}
